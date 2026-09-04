@@ -1,0 +1,855 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rohan's Portfolio - Windows XP</title>
+  <link rel="icon" type="image/png" href="assets/icons/windows-xp.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- GSAP & Draggable -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
+
+  <script defer src="script.js"></script>
+</head>
+
+<body>
+
+  <!-- Boot Screen -->
+  <div id="boot-screen" class="boot-screen">
+    <div class="boot-logo">
+      <img src="assets/icons/windows xp logo.png" alt="Windows XP Logo">
+    </div>
+    <div class="loading-bar">
+      <div class="loading-blocks">
+        <div class="block"></div>
+        <div class="block"></div>
+        <div class="block"></div>
+      </div>
+    </div>
+    <div class="boot-footer">
+      <span class="copyright">Copyright Â© Microsoft Corporation</span>
+      <span class="microsoft">Portfolio<sup>Â®</sup></span>
+    </div>
+  </div>
+
+  <!-- Login Screen -->
+  <div id="login-screen" class="login-screen" style="display: none;">
+    <div class="login-top"></div>
+    <div class="login-middle">
+      <div class="login-left">
+        <div class="windows-logo login-logo">
+          <div class="win-red"></div>
+          <div class="win-green"></div>
+          <div class="win-blue"></div>
+          <div class="win-yellow"></div>
+        </div>
+        <h2>To begin, click your user name</h2>
+      </div>
+      <div class="login-divider"></div>
+      <div class="login-right">
+        <div class="user-profile" id="login-user">
+          <img src="assets/icons/User Accounts.png"
+            class="user-avatar-large" alt="User">
+          <div class="user-details">
+            <span class="user-name">Rohan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="login-bottom">
+      <button class="turn-off-btn" id="login-turn-off-btn">
+        <img src="assets/icons/Power.png" style="width: 32px; height: 32px; object-fit: contain;">
+        Turn off computer
+      </button>
+    </div>
+    <div id="welcome-message"
+      style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 42px; font-style: italic; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); font-family: Tahoma, 'Segoe UI', Arial, sans-serif; letter-spacing: 1px;">
+      Welcome
+    </div>
+  </div>
+
+  <!-- Background Wallpaper -->
+  <div class="wallpaper"></div>
+
+  <!-- Desktop Environment -->
+  <main class="desktop" id="desktop">
+
+    <!-- Desktop Icons -->
+    <div class="desktop-icons">
+      <div class="desktop-icon" data-window="window-resume" id="icon-resume">
+        <img src="assets/icons/XPS document.png" alt="My Resume">
+        <span>My Resume</span>
+      </div>
+      <div class="desktop-icon" data-window="window-about" id="icon-about">
+        <img src="assets/icons/My Computer.png" alt="My Computer">
+        <span>About Me</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-projects" id="icon-projects">
+        <img src="assets/icons/Folder Closed.png" alt="Projects Folder">
+        <span>Projects</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-capabilities" id="icon-capabilities">
+        <img src="assets/icons/System Properties.png"
+          alt="Capabilities">
+        <span>Capabilities</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-contact" id="icon-contact">
+        <img src="assets/icons/Email.png" alt="Contact Envelope">
+        <span>Contact</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-notepad" id="icon-notepad">
+        <img src="assets/icons/Notepad.png" alt="Notepad">
+        <span>Notepad</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-paint" id="icon-paint">
+        <img src="assets/icons/Paint.png" alt="Paint">
+        <span>MS Paint</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-mediaplayer" id="icon-mediaplayer">
+        <img src="assets/icons/Windows Media Player 10.png"
+          alt="Media Player">
+        <span>Media Player</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-search" id="icon-search">
+        <img src="assets/icons/Search.png" alt="Search">
+        <span>Search</span>
+      </div>
+
+      <div class="desktop-icon" data-window="window-minesweeper" id="icon-minesweeper">
+        <img src="assets/icons/Minesweeper.png" alt="Minesweeper">
+        <span>Minesweeper</span>
+      </div>
+    </div>
+
+    <!-- Windows Container -->
+    <div id="windows-container">
+
+      <!-- Window: Resume -->
+      <div class="xp-window" id="window-resume" style="display: none; width: 800px; height: 600px;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/XPS document.png" class="title-icon">
+            My Resume
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar">
+          <div class="menu-bar">
+            <span>File</span><span>View</span><span>Help</span>
+          </div>
+          <div class="nav-bar">
+            <button class="nav-btn"><img src="assets/icons/Magnifier.png"> Zoom</button>
+            <button class="nav-btn"><img src="assets/icons/Save.png"> Save</button>
+            <button class="nav-btn"><img src="assets/icons/Printer.png"> Print</button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn" onclick="document.getElementById('icon-contact').click()"><img src="assets/icons/Search for people.png"> Contact Me</button>
+          </div>
+        </div>
+        <div class="window-body" style="padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden; border: none; border-left: 1px solid #7f9db9; border-right: 1px solid #7f9db9; background: white;">
+          <iframe src="assets/resume.pdf#toolbar=0&navpanes=0&scrollbar=0" style="flex: 1; width: 100%; height: 100%; border: none;"></iframe>
+        </div>
+      </div>
+
+      <!-- Window: About -->
+      <div class="xp-window" id="window-about" style="display: none; width: 750px; height: 550px;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/My Computer.png" class="title-icon">
+            About Me
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar">
+          <div class="menu-bar">
+            <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
+          </div>
+          <div class="nav-bar">
+            <button class="nav-btn"><span>ðŸ”™</span> Back</button>
+            <button class="nav-btn"><span>â­ï¸</span> Forward</button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn"><img src="assets/icons/Up.png">
+              Up</button>
+            <div class="nav-divider"></div>
+            <button class="nav-btn"><span>ðŸ”</span> Search</button>
+            <button class="nav-btn"><span>ðŸ“</span> Folders</button>
+          </div>
+          <div class="address-bar">
+            <span>Address</span>
+            <div class="address-input">
+              <img src="assets/icons/My Computer.png">
+              <span>About Me</span>
+            </div>
+            <button class="go-btn">Go</button>
+          </div>
+        </div>
+        <div class="window-body explorer-body">
+          <div class="explorer-left">
+            <div class="xp-panel">
+              <div class="xp-panel-header">Social Links <span style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-content">
+                <a href="https://www.linkedin.com/in/rohan-ekshinge-115339299" target="_blank">
+                  <img src="assets/icons/linkedin.png" class="panel-icon"> LinkedIn
+                </a>
+                <a href="https://github.com/rohancodestoo/" target="_blank">
+                  <img src="assets/icons/github.svg" class="panel-icon"> GitHub
+                </a>
+                <a href="https://www.instagram.com/rohan.jpg_/" target="_blank">
+                  <img src="assets/icons/instagram.png" class="panel-icon"> Instagram
+                </a>
+              </div>
+            </div>
+            <div class="xp-panel">
+              <div class="xp-panel-header">Skills <span style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-content">
+                <span><img src="assets/icons/Official_CSS_Logo.svg.webp" class="panel-icon"> CSS</span>
+                <span><img src="assets/icons/sql.svg" class="panel-icon"> SQL</span>
+                <span><img src="assets/icons/javascript.svg" class="panel-icon"> Javascript</span>
+                <span><img src="assets/icons/python.svg" class="panel-icon"> Python</span>
+                <span><img src="assets/icons/html.svg" class="panel-icon"> HTML</span>
+                <span><img src="assets/icons/react.svg" class="panel-icon"> ReactJS</span>
+                <span><img src="assets/icons/mongo.svg" class="panel-icon"> MongoDB</span>
+              </div>
+            </div>
+            <div class="xp-panel">
+              <div class="xp-panel-header">Software <span class="panel-toggle" style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-content">
+                <span><img src="assets/icons/vs code.svg" class="panel-icon"> VS Code</span>
+                <span><img src="assets/icons/after effects.svg" class="panel-icon"> After Effects</span>
+                <span><img src="assets/icons/premiere.svg" class="panel-icon"> Premiere Pro</span>
+              </div>
+            </div>
+          </div>
+          <div class="explorer-right about-right">
+            <h1 class="about-title">About Me</h1>
+            <div class="about-content">
+              <div class="about-row">
+                <img src="assets/icons/User Accounts.png"
+                  class="about-avatar">
+                <p>I'm Rohan Vijay Ekshinge, an enthusiastic developer currently pursuing Master of Computer
+                  Applications at DPGU - School of Management & Research (2025-2027). Before that, I completed my B.C.S.
+                  (Bachelor of Computer Science) at Swami Vivekananda College, Kolhapur.</p>
+              </div>
+              <div class="about-row">
+                <img src="assets/icons/User Accounts.png"
+                  class="about-avatar">
+                <p>I always care about how a piece of work looks and functions. Building for the web lets me combine my
+                  skills in React, JavaScript, and Python into interactive products that I can stand behind.</p>
+              </div>
+            </div>
+            <img src="assets/icons/Checklist.png"
+              class="about-watermark">
+          </div>
+        </div>
+      </div>
+
+      <!-- Window: Media Player -->
+      <div class="xp-window" id="window-mediaplayer"
+        style="display: none; width: 640px; height: 480px; z-index: 10; background-color: #000; border-color: #00138c;">
+        <div class="title-bar"
+          style="background: linear-gradient(to bottom, #001f60 0%, #0036a5 50%, #001f60 100%); border-color: #001f60;">
+          <div class="title-bar-text">
+            <img src="assets/icons/Windows Media Player 10.png"
+              class="title-icon" alt="Media Player">
+            Windows Media Player
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body wmp-body"
+          style="padding: 0; background: #000; display: flex; flex-direction: column; border: none; overflow: hidden; margin: 0;">
+
+          <div class="wmp-content" style="display: flex; flex: 1; overflow: hidden;">
+            <div class="wmp-video-container"
+              style="flex: 1; display: flex; align-items: center; justify-content: center; background: #000; position: relative;">
+              <video id="wmp-video" src="" style="width: 100%; height: 100%; object-fit: contain;"></video>
+            </div>
+            <div class="wmp-playlist"
+              style="width: 200px; background: #1a1a1a; color: white; border-left: 1px solid #333; display: flex; flex-direction: column;">
+              <div style="background: #333; padding: 5px; font-weight: bold; font-size: 11px;">Now Playing List - my edits</div>
+              <ul id="wmp-playlist-items"
+                style="list-style: none; padding: 0; margin: 0; font-size: 11px; overflow-y: auto; flex: 1;">
+                <li class="wmp-item active"
+                  data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788344061/Arcane.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">Arcane</li>
+                <li class="wmp-item" data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788343636/f1.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">f1</li>
+                <li class="wmp-item" data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788344062/GHOST.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">GHOST</li>
+                <li class="wmp-item"
+                  data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788343620/Darling_I.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">Darling</li>
+                <li class="wmp-item" data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788344286/11K.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">11K</li>
+                <li class="wmp-item"
+                  data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788344378/JANICE_STFU.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">ICEMAN</li>
+                <li class="wmp-item" data-src="https://res.cloudinary.com/jyvlxwbg/video/upload/v1788344371/Dracula.mp4"
+                  style="padding: 5px 10px; cursor: pointer; border-bottom: 1px solid #333;">Dracula</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="wmp-controls"
+            style="height: 60px; background: linear-gradient(to bottom, #111, #333); border-top: 2px solid #555; display: flex; align-items: center; padding: 0 15px; gap: 15px;">
+            <button id="wmp-play-btn"
+              style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #5a7edc, #1941a5); border: 2px solid #aaa; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;">â–¶</button>
+            <div class="wmp-timeline" style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
+              <input type="range" id="wmp-seek" value="0" min="0" max="100" style="width: 100%;">
+              <div style="display: flex; justify-content: space-between; color: #ccc; font-size: 10px;">
+                <span id="wmp-current-time">00:00</span>
+                <span id="wmp-duration">00:00</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Window: Projects -->
+      <div class="xp-window" id="window-projects" style="display: none; width: 700px; height: 500px;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Folder Closed.png"
+              class="title-icon">
+            Projects
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar">
+          <div class="menu-bar">
+            <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
+          </div>
+          <div class="nav-bar">
+            <button class="nav-btn"><span>ðŸ”™</span> Back</button>
+            <button class="nav-btn"><span>â­ï¸</span> Forward</button>
+            <button class="nav-btn"><span>ðŸ›‘</span> Stop</button>
+            <button class="nav-btn"><span>ðŸ”„</span> Refresh</button>
+            <button class="nav-btn"><span>ðŸ </span> Home</button>
+          </div>
+          <div class="address-bar">
+            <span>Address</span>
+            <div class="address-input">
+              <img src="assets/icons/URL.png">
+              <span>https://www.myprojects.com</span>
+            </div>
+            <button class="go-btn">Go</button>
+          </div>
+        </div>
+        <div class="window-body explorer-body">
+          <div class="explorer-left">
+            <div class="xp-panel">
+              <div class="xp-panel-header">Folder Tasks</div>
+              <div class="xp-panel-content">
+                <a href="#">Make a new folder</a>
+                <a href="#">Publish this folder to the Web</a>
+                <a href="#">Share this folder</a>
+              </div>
+            </div>
+          </div>
+          <div class="explorer-right">
+            <ul style="list-style-type: none; padding: 0; margin: 0; font-family: Tahoma, sans-serif; font-size: 13px;">
+              <li style="margin-bottom: 15px;">
+                <a href="https://github.com/rohancodestoo/binge-mern" target="_blank"
+                  style="color: #00138c; text-decoration: underline; font-weight: bold;">
+                  binge-mern
+                </a>
+                <div style="color: #555; margin-top: 3px; font-size: 11px;">A letterboxd clone entirely vibe coded in
+                  mern</div>
+              </li>
+              <li style="margin-bottom: 15px;">
+                <a href="https://github.com/rohancodestoo/mac-history" target="_blank"
+                  style="color: #00138c; text-decoration: underline; font-weight: bold;">
+                  mac-history
+                </a>
+                <div style="color: #555; margin-top: 3px; font-size: 11px;">telling a brief history of apple's beloved
+                  imac through css.</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window: Capabilities -->
+      <div class="xp-window" id="window-capabilities" style="display: none;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/System Properties.png"
+              class="title-icon">
+            Capabilities
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <ul class="capabilities-list">
+            <li>
+              <strong>Software Development</strong>
+              <p>Python, C#, Django, Winforms, SQL.</p>
+            </li>
+            <li>
+              <strong>Web Development</strong>
+              <p>HTML, CSS, Javascript, ReactJS.</p>
+            </li>
+            <li>
+              <strong>Database Management</strong>
+              <p>MongoDB, SQLite, SQL.</p>
+            </li>
+            <li>
+              <strong>Creative Interests</strong>
+              <p>Drawing, Sketching, Motion design, Video editing.</p>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Window: Contact -->
+      <div class="xp-window" id="window-contact" style="display: none;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Email.png" class="title-icon">
+            Contact
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body">
+          <h3>Let's Connect</h3>
+          <p>I'm looking forward to discussing new opportunities. Feel free to reach out!</p>
+          <br>
+          <a href="mailto:realrohan20@gmail.com" class="xp-button">Email: realrohan20@gmail.com</a>
+          <br><br>
+          <p><strong>Phone:</strong> +91-9022809616</p>
+        </div>
+      </div>
+      <!-- Window: Notepad -->
+      <div class="xp-window" id="window-notepad" style="display: none; width: 500px; z-index: 10;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Notepad.png" class="title-icon"
+              alt="Notepad">
+            Untitled - Notepad
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar">
+          <div class="menu-bar">
+            <span>File</span><span>Edit</span><span>Format</span><span>View</span><span>Help</span>
+          </div>
+        </div>
+        <div class="window-body notepad-body">
+          <textarea class="notepad-textarea" spellcheck="false"></textarea>
+        </div>
+      </div>
+
+      <!-- Window: Paint -->
+      <div class="xp-window" id="window-paint" style="display: none; width: 600px; z-index: 10;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Paint.png" class="title-icon"
+              alt="Paint">
+            untitled - Paint
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar">
+          <div class="menu-bar">
+            <span>File</span><span>Edit</span><span>View</span><span>Image</span><span>Colors</span><span>Help</span>
+          </div>
+        </div>
+        <div class="window-body paint-body">
+          <div class="paint-toolbar">
+            <div class="color-swatch" style="background-color: black;" data-color="black"></div>
+            <div class="color-swatch" style="background-color: red;" data-color="red"></div>
+            <div class="color-swatch" style="background-color: blue;" data-color="blue"></div>
+            <div class="color-swatch" style="background-color: green;" data-color="green"></div>
+            <div class="color-swatch" style="background-color: yellow;" data-color="yellow"></div>
+            <div class="color-swatch" style="background-color: white;" data-color="white"></div>
+            <button id="paint-clear" class="xp-button" style="margin-left: 10px;">Clear</button>
+          </div>
+          <div class="paint-canvas-container">
+            <canvas id="paint-canvas" width="575" height="400"></canvas>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window: Search -->
+      <div class="xp-window" id="window-search" style="display: none; width: 450px; z-index: 10;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Search.png" class="title-icon"
+              alt="Search">
+            Search Results
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body search-body">
+          <div class="search-left">
+            <div class="companion-bubble">
+              What do you want to search for?
+            </div>
+            <!-- Placeholder for Rover, user can swap with gif -->
+            <img src="assets/icons/Search.png" class="companion-avatar"
+              alt="Rover">
+          </div>
+          <div class="search-right">
+            <h3>Search Companion</h3>
+            <input type="text" class="search-input" placeholder="Enter keywords...">
+            <button class="xp-button">Search</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Window: Minesweeper -->
+      <div class="xp-window" id="window-minesweeper" style="display: none; width: auto; z-index: 10;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Minesweeper.png" class="title-icon"
+              alt="Minesweeper">
+            Minesweeper
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Minimize"></button>
+            <button aria-label="Maximize"></button>
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="explorer-toolbar" style="padding: 2px;">
+          <div class="menu-bar"><span>Game</span><span>Help</span></div>
+        </div>
+        <div class="window-body minesweeper-body">
+          <div class="ms-header">
+            <div class="ms-counter" id="ms-mines-count">010</div>
+            <button class="ms-face" id="ms-face">ðŸ™‚</button>
+            <div class="ms-counter" id="ms-timer">000</div>
+          </div>
+          <div class="ms-grid" id="ms-grid">
+            <!-- JS generates 9x9 grid -->
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Start Menu -->
+  <div id="start-menu" class="start-menu">
+    <div class="start-menu-header">
+      <img src="assets/icons/User Accounts.png" class="user-avatar"
+        alt="User">
+      <span>Rohan</span>
+    </div>
+    <div class="start-menu-body">
+      <div class="start-menu-left">
+        <div class="start-menu-apps">
+          <a href="#" class="start-item" data-window="window-projects">
+            <img class="item-icon" src="assets/icons/Folder Closed.png">
+            <div class="item-text">
+              <strong>Projects</strong>
+              <span>My portfolio work</span>
+            </div>
+          </a>
+          <a href="#" class="start-item" data-window="window-capabilities">
+            <img class="item-icon"
+              src="assets/icons/System Properties.png">
+            <div class="item-text">
+              <strong>Capabilities</strong>
+              <span>What I do</span>
+            </div>
+          </a>
+          <div class="separator"></div>
+          <a href="#" class="start-item" data-window="window-notepad">
+            <img class="item-icon" src="assets/icons/Notepad.png">
+            <div class="item-text">
+              <strong>Notepad</strong>
+              <span>Text Editor</span>
+            </div>
+          </a>
+          <a href="#" class="start-item" data-window="window-paint">
+            <img class="item-icon" src="assets/icons/Paint.png">
+            <div class="item-text">
+              <strong>MS Paint</strong>
+              <span>Image Editor</span>
+            </div>
+          </a>
+          <a href="#" class="start-item" data-window="window-mediaplayer">
+            <img class="item-icon"
+              src="assets/icons/Windows Media Player 10.png">
+            <div class="item-text">
+              <strong>Media Player</strong>
+              <span>Video Edits</span>
+            </div>
+          </a>
+          <a href="#" class="start-item" data-window="window-search">
+            <img class="item-icon" src="assets/icons/Search.png">
+            <div class="item-text">
+              <strong>Search</strong>
+              <span>Companion</span>
+            </div>
+          </a>
+          <a href="#" class="start-item" data-window="window-minesweeper">
+            <img class="item-icon" src="assets/icons/Minesweeper.png">
+            <div class="item-text">
+              <strong>Minesweeper</strong>
+              <span>Game</span>
+            </div>
+          </a>
+        </div>
+        <div class="separator"></div>
+        <a href="#" class="start-item all-programs">
+          <div class="item-text" style="text-align: center; width: 100%;">
+            <strong>All Programs</strong>
+            <span style="color: #333;">â–¶</span>
+          </div>
+        </a>
+      </div>
+      <div class="start-menu-right">
+        <a href="#" class="start-item right-item" data-window="window-about">
+          <img src="assets/icons/My Computer.png" class="small-icon"> My
+          Computer
+        </a>
+        <a href="https://www.linkedin.com/in/rohan-ekshinge-115339299" target="_blank" class="start-item right-item">
+          <img src="assets/icons/linkedin.png" class="small-icon">
+          LinkedIn
+        </a>
+        <a href="https://github.com/rohancodestoo/" target="_blank" class="start-item right-item">
+          <img src="assets/icons/github.svg" class="small-icon">
+          GitHub
+        </a>
+        <a href="https://www.instagram.com/rohan.jpg_/" target="_blank" class="start-item right-item">
+          <img src="assets/icons/instagram.png" class="small-icon">
+          Instagram
+        </a>
+        <div class="separator"></div>
+        <a href="#" class="start-item right-item">
+          <img src="assets/icons/System Properties.png"
+            class="small-icon"> Control Panel
+        </a>
+        <a href="#" class="start-item right-item" data-window="window-contact">
+          <img src="assets/icons/Run.png" class="small-icon"> Run...
+        </a>
+      </div>
+    </div>
+    <div class="start-menu-footer">
+      <div class="footer-btn" id="start-log-off-btn">
+        <img src="assets/icons/Logout.png" class="footer-icon"> Log Off
+      </div>
+      <div class="footer-btn" id="start-turn-off-btn">
+        <img src="assets/icons/Power.png" class="footer-icon"> Turn
+        Off Computer
+      </div>
+    </div>
+  </div>
+
+  <!-- Taskbar -->
+  <footer class="taskbar">
+    <button id="start-btn" class="start-btn">
+      <div class="windows-logo">
+        <div class="win-red"></div>
+        <div class="win-green"></div>
+        <div class="win-blue"></div>
+        <div class="win-yellow"></div>
+      </div>
+      start
+    </button>
+    <div class="taskbar-divider"></div>
+    <div class="quick-launch"></div>
+    <div class="taskbar-apps" id="taskbar-apps">
+      <!-- Open window tabs will appear here -->
+    </div>
+    <div class="system-tray">
+      <span class="tray-icon">ðŸ”Š</span>
+      <span class="tray-icon">ðŸ›¡ï¸</span>
+      <span id="clock" class="clock">12:00 PM</span>
+    </div>
+  </footer>
+
+  <!-- Context Menus -->
+  <div id="desktop-menu" class="context-menu" style="display: none;">
+    <div class="menu-gutter"></div>
+    <div class="menu-items">
+      <div class="menu-item" id="reset-icons-btn"><span>Reset Icon Arrangement</span></div>
+      <div class="menu-item" onclick="fakeRefresh()"><span>Refresh</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item disabled"><span>Paste</span></div>
+      <div class="menu-item disabled"><span>Paste Shortcut</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>New</span><span>â–¶</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>Properties</span></div>
+    </div>
+  </div>
+
+  <div id="icon-menu" class="context-menu" style="display: none;">
+    <div class="menu-gutter"></div>
+    <div class="menu-items">
+      <div class="menu-item"><strong>Open</strong></div>
+      <div class="menu-item"><span>Explore</span></div>
+      <div class="menu-item"><span>Search...</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>Send To</span><span>â–¶</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>Cut</span></div>
+      <div class="menu-item"><span>Copy</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>Create Shortcut</span></div>
+      <div class="menu-item"><span>Delete</span></div>
+      <div class="menu-item"><span>Rename</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item"><span>Properties</span></div>
+    </div>
+  </div>
+
+  <div id="taskbar-menu" class="context-menu" style="display: none;">
+    <div class="menu-gutter"></div>
+    <div class="menu-items">
+      <div class="menu-item"><span>Toolbars</span><span>â–¶</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item disabled"><span>Cascade Windows</span></div>
+      <div class="menu-item disabled"><span>Tile Windows Horizontally</span></div>
+      <div class="menu-item disabled"><span>Tile Windows Vertically</span></div>
+      <div class="menu-item disabled"><span>Show the Desktop</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item disabled"><span>Task Manager</span></div>
+      <div class="menu-separator"></div>
+      <div class="menu-item disabled"><span>Lock the Taskbar</span></div>
+      <div class="menu-item"><span>Properties</span></div>
+    </div>
+  </div>
+
+  <!-- System Tray Balloon -->
+  <div id="xp-balloon" class="xp-balloon" style="display: none;">
+    <div class="balloon-close">âœ•</div>
+    <div class="balloon-content">
+      <strong>Welcome to my portfolio!</strong>
+      <span>Click around to explore.</span>
+    </div>
+  </div>
+
+  <!-- Calendar Widget -->
+  <div id="xp-calendar" class="xp-calendar" style="display: none;">
+    <div class="calendar-header">
+      <div class="cal-month-year" id="cal-month-year">August 2026</div>
+    </div>
+    <div class="calendar-body">
+      <div class="cal-days-header">
+        <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+      </div>
+      <div class="cal-grid" id="cal-grid">
+        <!-- JS will populate dates -->
+      </div>
+    </div>
+    <div class="calendar-footer">
+      <div class="cal-time" id="cal-time">12:00:00 PM</div>
+    </div>
+  </div>
+
+  <!-- Link Dialog Overlay -->
+  <div class="xp-dialog-overlay" id="link-dialog-overlay" style="display: none;"></div>
+  
+  <!-- Link Dialog -->
+  <div class="xp-window xp-dialog" id="link-dialog" style="display: none; width: 350px;">
+    <div class="title-bar">
+      <div class="title-bar-text">Open Link</div>
+      <div class="title-bar-controls">
+        <button aria-label="Close" class="close-btn" id="link-dialog-close"></button>
+      </div>
+    </div>
+    <div class="window-body dialog-body">
+      <div class="dialog-content">
+        <img src="" id="link-dialog-icon" alt="Icon" class="dialog-icon">
+        <span id="link-dialog-text">Are you sure you want to open this link?</span>
+      </div>
+      <div class="dialog-buttons">
+        <button class="xp-button" id="link-dialog-cancel">Cancel</button>
+        <button class="xp-button" id="link-dialog-confirm">Visit Link</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Turn Off Dialog Overlay -->
+  <div id="turn-off-overlay" class="turn-off-overlay" style="display: none;"></div>
+  
+  <!-- Turn Off Dialog -->
+  <div id="turn-off-dialog" class="turn-off-dialog" style="display: none;">
+    <div class="turn-off-header">
+      <span>Turn off computer</span>
+      <div class="windows-logo-small">
+        <div class="win-red"></div>
+        <div class="win-green"></div>
+        <div class="win-blue"></div>
+        <div class="win-yellow"></div>
+      </div>
+    </div>
+    <div class="turn-off-body">
+      <div class="turn-off-option">
+        <img src="assets/icons/Standby.png" alt="Standby">
+        <span>Standby</span>
+      </div>
+      <div class="turn-off-option" id="btn-turn-off">
+        <img src="assets/icons/Power.png" alt="Power">
+        <span>Power</span>
+      </div>
+      <div class="turn-off-option">
+        <img src="assets/icons/Restart.png" alt="Restart">
+        <span>Restart</span>
+      </div>
+    </div>
+    <div class="turn-off-footer">
+      <button class="turn-off-cancel" id="turn-off-cancel">Cancel</button>
+    </div>
+  </div>
+
+</body>
+
+</html>
