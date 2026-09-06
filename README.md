@@ -20,7 +20,7 @@
 
 ## 🚀 Live Demo
 
-[Link to Live Demo] *(Add your hosted link here, e.g., GitHub Pages, Vercel, Netlify)*
+https://rohancodestoo.github.io/RohanXP/
 
 ## 💻 Tech Stack
 
