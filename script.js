@@ -1,4 +1,4 @@
-﻿// script.js - Windows XP Portfolio Logic with GSAP
+// script.js - Windows XP Portfolio Logic with GSAP
 
 document.addEventListener('DOMContentLoaded', () => {
   
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (win.id === 'window-mediaplayer') {
       const playBtn = win.querySelector('#wmp-play-btn');
-      if (playBtn) playBtn.textContent = 'â–¶';
+      if (playBtn) playBtn.textContent = '▶';
     }
 
     gsap.to(win, { 
@@ -679,7 +679,7 @@ document.addEventListener('DOMContentLoaded', () => {
       firstClick = true;
       minesLeft = totalMines;
       msMinesCount.textContent = minesLeft.toString().padStart(3, '0');
-      msFace.textContent = 'ðŸ™‚';
+      msFace.textContent = '🙂';
       
       for(let r=0; r<rows; r++) {
         for(let c=0; c<cols; c++) {
@@ -738,7 +738,7 @@ document.addEventListener('DOMContentLoaded', () => {
       
       if(board[r][c].mine) {
         gameOver = true;
-        msFace.textContent = 'ðŸ˜µ';
+        msFace.textContent = '😵';
         revealAll();
       } else {
         revealCell(r, c);
@@ -749,7 +749,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleMsRightClick(r, c, cell) {
       if(gameOver || board[r][c].revealed) return;
       board[r][c].flagged = !board[r][c].flagged;
-      cell.textContent = board[r][c].flagged ? 'ðŸš©' : '';
+      cell.textContent = board[r][c].flagged ? '🚩' : '';
       minesLeft += board[r][c].flagged ? -1 : 1;
       msMinesCount.textContent = minesLeft.toString().padStart(3, '0');
     }
@@ -778,7 +778,7 @@ document.addEventListener('DOMContentLoaded', () => {
           const cell = msGrid.children[r * cols + c];
           if(board[r][c].mine) {
             cell.classList.add('revealed', 'mine');
-            cell.textContent = 'ðŸ’£';
+            cell.textContent = '💣';
           }
         }
       }
@@ -793,7 +793,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if(unrevealedSafe === 0) {
         gameOver = true;
-        msFace.textContent = 'ðŸ˜Ž';
+        msFace.textContent = '😎';
       }
     }
     
@@ -830,7 +830,7 @@ document.addEventListener('DOMContentLoaded', () => {
         
         const toggleIcon = header.querySelector('span');
         if (toggleIcon) {
-          toggleIcon.textContent = isCollapsed ? 'â–²' : 'â–¼';
+          toggleIcon.textContent = isCollapsed ? '▲' : '▼';
         }
       }
     });
@@ -856,10 +856,10 @@ document.addEventListener('DOMContentLoaded', () => {
     wmpPlayBtn.addEventListener('click', () => {
       if (wmpVideo.paused) {
         wmpVideo.play();
-        wmpPlayBtn.textContent = 'â¸';
+        wmpPlayBtn.textContent = '⏸';
       } else {
         wmpVideo.pause();
-        wmpPlayBtn.textContent = 'â–¶';
+        wmpPlayBtn.textContent = '▶';
       }
     });
 
@@ -882,6 +882,15 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
+    // Volume
+    const wmpVolume = document.getElementById('wmp-volume');
+    if (wmpVolume) {
+      wmpVideo.volume = wmpVolume.value;
+      wmpVolume.addEventListener('input', () => {
+        wmpVideo.volume = wmpVolume.value;
+      });
+    }
+
     // Playlist click
     wmpPlaylistItems.forEach(item => {
       item.addEventListener('click', () => {
@@ -892,7 +901,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (src) {
           wmpVideo.src = src;
           wmpVideo.play().catch(e => console.log('Autoplay blocked:', e));
-          wmpPlayBtn.textContent = 'â¸';
+          wmpPlayBtn.textContent = '⏸';
         }
       });
     });
@@ -1089,5 +1098,124 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-});
+  // --- Display Properties Logic ---
+  const desktopPropertiesBtn = document.getElementById('desktop-properties-btn');
+  const displayPropertiesWin = document.getElementById('window-display-properties');
+  const wallpaperList = document.getElementById('wallpaper-list');
+  const previewScreen = document.getElementById('preview-screen');
+  const displayApplyBtn = document.getElementById('display-apply-btn');
+  const displayOkBtn = document.getElementById('display-ok-btn');
+  const displayCancelBtn = document.getElementById('display-cancel-btn');
+  const wallpaperContainer = document.querySelector('.wallpaper');
+  
+  let selectedWallpaper = 'Bliss.jpg';
+  
+  if (desktopPropertiesBtn) {
+    desktopPropertiesBtn.addEventListener('click', () => {
+      openWindow('window-display-properties', null);
+      hideAllMenus();
+    });
+  }
+  
+  if (wallpaperList) {
+    const listItems = wallpaperList.querySelectorAll('.list-item');
+    listItems.forEach(item => {
+      item.addEventListener('click', () => {
+        listItems.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        
+        selectedWallpaper = item.getAttribute('data-wallpaper');
+        if (previewScreen) {
+          previewScreen.style.backgroundImage = `url('assets/wallpapers/${selectedWallpaper}')`;
+        }
+        
+        if (displayApplyBtn) {
+          displayApplyBtn.removeAttribute('disabled');
+        }
+      });
+    });
+  }
+  
+  function applyWallpaper() {
+    if (wallpaperContainer) {
+      wallpaperContainer.style.backgroundImage = `url('assets/wallpapers/${selectedWallpaper}')`;
+    }
+    if (displayApplyBtn) {
+      displayApplyBtn.setAttribute('disabled', 'true');
+    }
+  }
+  
+  if (displayApplyBtn) {
+    displayApplyBtn.addEventListener('click', applyWallpaper);
+  }
+  
+  if (displayOkBtn) {
+    displayOkBtn.addEventListener('click', () => {
+      applyWallpaper();
+      closeWindow(displayPropertiesWin);
+    });
+  }
+  
+  if (displayCancelBtn) {
+    displayCancelBtn.addEventListener('click', () => {
+      closeWindow(displayPropertiesWin);
+      
+      if (wallpaperContainer && previewScreen && wallpaperList) {
+        const currentBg = wallpaperContainer.style.backgroundImage;
+        const bgToUse = currentBg ? currentBg : "url(\"assets/wallpapers/Bliss.jpg\")";
+        previewScreen.style.backgroundImage = bgToUse;
+        
+        // Extract filename robustly handling different quote styles in url()
+        const match = bgToUse.match(/url\(['"]?(.*?)['"]?\)/);
+        let bgFilename = 'Bliss.jpg';
+        if (match && match[1]) {
+           bgFilename = match[1].split('/').pop();
+        }
 
+        const listItems = wallpaperList.querySelectorAll('.list-item');
+        listItems.forEach(i => {
+          if (i.getAttribute('data-wallpaper') === bgFilename) {
+            i.classList.add('active');
+            selectedWallpaper = bgFilename;
+          } else {
+            i.classList.remove('active');
+          }
+        });
+      }
+    });
+  }
+
+  const btnTurnOff = document.getElementById('btn-turn-off');
+  const btnRestart = document.getElementById('btn-restart');
+  const shutdownScreen = document.getElementById('shutdown-screen');
+  const shutdownMessage = document.getElementById('shutdown-message');
+  const shutdownSound = new Audio('assets/sounds/shutdown.mp3');
+  
+  if (btnTurnOff) {
+    btnTurnOff.addEventListener('click', () => {
+      document.getElementById('turn-off-dialog').style.display = 'none';
+      document.getElementById('turn-off-overlay').style.display = 'none';
+      shutdownMessage.textContent = 'Windows is shutting down...';
+      shutdownScreen.style.display = 'flex';
+      shutdownSound.play().catch(e => console.log('Audio play failed:', e));
+      setTimeout(() => {
+        document.body.innerHTML = '';
+        document.body.style.backgroundColor = 'black';
+      }, 3000);
+    });
+  }
+
+  if (btnRestart) {
+    btnRestart.addEventListener('click', () => {
+      document.getElementById('turn-off-dialog').style.display = 'none';
+      document.getElementById('turn-off-overlay').style.display = 'none';
+      shutdownMessage.textContent = 'Windows is restarting...';
+      shutdownScreen.style.display = 'flex';
+      shutdownSound.play().catch(e => console.log('Audio play failed:', e));
+      setTimeout(() => {
+        location.reload();
+      }, 3000);
+    });
+  }
+
+});

@@ -37,8 +37,8 @@
       </div>
     </div>
     <div class="boot-footer">
-      <span class="copyright">Copyright Â© Microsoft Corporation</span>
-      <span class="microsoft">Portfolio<sup>Â®</sup></span>
+      <span class="copyright">Copyright © Microsoft Corporation</span>
+      <span class="microsoft">Portfolio<sup>®</sup></span>
     </div>
   </div>
 
@@ -58,8 +58,7 @@
       <div class="login-divider"></div>
       <div class="login-right">
         <div class="user-profile" id="login-user">
-          <img src="assets/icons/User Accounts.png"
-            class="user-avatar-large" alt="User">
+          <img src="assets/icons/User Accounts.png" class="user-avatar-large" alt="User">
           <div class="user-details">
             <span class="user-name">Rohan</span>
           </div>
@@ -76,6 +75,19 @@
       style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 42px; font-style: italic; font-weight: bold; text-shadow: 2px 2px 4px rgba(0,0,0,0.4); font-family: Tahoma, 'Segoe UI', Arial, sans-serif; letter-spacing: 1px;">
       Welcome
     </div>
+  </div>
+
+  <!-- Shutdown Screen -->
+  <div id="shutdown-screen" class="login-screen" style="display: none; z-index: 10005;">
+    <div class="login-top"></div>
+    <div class="login-middle" style="justify-content: center; flex-direction: column; align-items: center;">
+      <img src="assets/icons/windows xp logo.png" alt="Windows XP" style="width: 250px; margin-bottom: 20px;">
+      <div id="shutdown-message"
+        style="color: white; font-size: 20px; font-family: Tahoma, 'Segoe UI', Arial, sans-serif;">
+        Windows is shutting down...
+      </div>
+    </div>
+    <div class="login-bottom"></div>
   </div>
 
   <!-- Background Wallpaper -->
@@ -101,8 +113,7 @@
       </div>
 
       <div class="desktop-icon" data-window="window-capabilities" id="icon-capabilities">
-        <img src="assets/icons/System Properties.png"
-          alt="Capabilities">
+        <img src="assets/icons/System Properties.png" alt="Capabilities">
         <span>Capabilities</span>
       </div>
 
@@ -122,8 +133,7 @@
       </div>
 
       <div class="desktop-icon" data-window="window-mediaplayer" id="icon-mediaplayer">
-        <img src="assets/icons/Windows Media Player 10.png"
-          alt="Media Player">
+        <img src="assets/icons/Windows Media Player 10.png" alt="Media Player">
         <span>Media Player</span>
       </div>
 
@@ -163,11 +173,14 @@
             <button class="nav-btn"><img src="assets/icons/Save.png"> Save</button>
             <button class="nav-btn"><img src="assets/icons/Printer.png"> Print</button>
             <div class="nav-divider"></div>
-            <button class="nav-btn" onclick="document.getElementById('icon-contact').click()"><img src="assets/icons/Search for people.png"> Contact Me</button>
+            <button class="nav-btn" onclick="document.getElementById('icon-contact').click()"><img
+                src="assets/icons/Search for people.png"> Contact Me</button>
           </div>
         </div>
-        <div class="window-body" style="padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden; border: none; border-left: 1px solid #7f9db9; border-right: 1px solid #7f9db9; background: white;">
-          <iframe src="assets/resume.pdf#toolbar=0&navpanes=0&scrollbar=0" style="flex: 1; width: 100%; height: 100%; border: none;"></iframe>
+        <div class="window-body"
+          style="padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden; border: none; border-left: 1px solid #7f9db9; border-right: 1px solid #7f9db9; background: white;">
+          <iframe src="assets/resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
+            style="flex: 1; width: 100%; height: 100%; border: none;"></iframe>
         </div>
       </div>
 
@@ -189,14 +202,14 @@
             <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
           </div>
           <div class="nav-bar">
-            <button class="nav-btn"><span>ðŸ”™</span> Back</button>
-            <button class="nav-btn"><span>â­ï¸</span> Forward</button>
+            <button class="nav-btn"><span>🔙</span> Back</button>
+            <button class="nav-btn"><span>⏭️</span> Forward</button>
             <div class="nav-divider"></div>
             <button class="nav-btn"><img src="assets/icons/Up.png">
               Up</button>
             <div class="nav-divider"></div>
-            <button class="nav-btn"><span>ðŸ”</span> Search</button>
-            <button class="nav-btn"><span>ðŸ“</span> Folders</button>
+            <button class="nav-btn"><span>🔍</span> Search</button>
+            <button class="nav-btn"><span>📁</span> Folders</button>
           </div>
           <div class="address-bar">
             <span>Address</span>
@@ -210,7 +223,7 @@
         <div class="window-body explorer-body">
           <div class="explorer-left">
             <div class="xp-panel">
-              <div class="xp-panel-header">Social Links <span style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-header">Social Links <span style="font-size: 10px;">▲</span></div>
               <div class="xp-panel-content">
                 <a href="https://www.linkedin.com/in/rohan-ekshinge-115339299" target="_blank">
                   <img src="assets/icons/linkedin.png" class="panel-icon"> LinkedIn
@@ -224,7 +237,7 @@
               </div>
             </div>
             <div class="xp-panel">
-              <div class="xp-panel-header">Skills <span style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-header">Skills <span style="font-size: 10px;">▲</span></div>
               <div class="xp-panel-content">
                 <span><img src="assets/icons/Official_CSS_Logo.svg.webp" class="panel-icon"> CSS</span>
                 <span><img src="assets/icons/sql.svg" class="panel-icon"> SQL</span>
@@ -236,7 +249,7 @@
               </div>
             </div>
             <div class="xp-panel">
-              <div class="xp-panel-header">Software <span class="panel-toggle" style="font-size: 10px;">â–²</span></div>
+              <div class="xp-panel-header">Software <span class="panel-toggle" style="font-size: 10px;">▲</span></div>
               <div class="xp-panel-content">
                 <span><img src="assets/icons/vs code.svg" class="panel-icon"> VS Code</span>
                 <span><img src="assets/icons/after effects.svg" class="panel-icon"> After Effects</span>
@@ -248,21 +261,18 @@
             <h1 class="about-title">About Me</h1>
             <div class="about-content">
               <div class="about-row">
-                <img src="assets/icons/User Accounts.png"
-                  class="about-avatar">
+                <img src="assets/icons/User Accounts.png" class="about-avatar">
                 <p>I'm Rohan Vijay Ekshinge, an enthusiastic developer currently pursuing Master of Computer
                   Applications at DPGU - School of Management & Research (2025-2027). Before that, I completed my B.C.S.
                   (Bachelor of Computer Science) at Swami Vivekananda College, Kolhapur.</p>
               </div>
               <div class="about-row">
-                <img src="assets/icons/User Accounts.png"
-                  class="about-avatar">
+                <img src="assets/icons/User Accounts.png" class="about-avatar">
                 <p>I always care about how a piece of work looks and functions. Building for the web lets me combine my
                   skills in React, JavaScript, and Python into interactive products that I can stand behind.</p>
               </div>
             </div>
-            <img src="assets/icons/Checklist.png"
-              class="about-watermark">
+            <img src="assets/icons/Checklist.png" class="about-watermark">
           </div>
         </div>
       </div>
@@ -273,8 +283,7 @@
         <div class="title-bar"
           style="background: linear-gradient(to bottom, #001f60 0%, #0036a5 50%, #001f60 100%); border-color: #001f60;">
           <div class="title-bar-text">
-            <img src="assets/icons/Windows Media Player 10.png"
-              class="title-icon" alt="Media Player">
+            <img src="assets/icons/Windows Media Player 10.png" class="title-icon" alt="Media Player">
             Windows Media Player
           </div>
           <div class="title-bar-controls">
@@ -293,7 +302,8 @@
             </div>
             <div class="wmp-playlist"
               style="width: 200px; background: #1a1a1a; color: white; border-left: 1px solid #333; display: flex; flex-direction: column;">
-              <div style="background: #333; padding: 5px; font-weight: bold; font-size: 11px;">Now Playing List - my edits</div>
+              <div style="background: #333; padding: 5px; font-weight: bold; font-size: 11px;">Now Playing List - my
+                edits</div>
               <ul id="wmp-playlist-items"
                 style="list-style: none; padding: 0; margin: 0; font-size: 11px; overflow-y: auto; flex: 1;">
                 <li class="wmp-item active"
@@ -320,13 +330,17 @@
           <div class="wmp-controls"
             style="height: 60px; background: linear-gradient(to bottom, #111, #333); border-top: 2px solid #555; display: flex; align-items: center; padding: 0 15px; gap: 15px;">
             <button id="wmp-play-btn"
-              style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #5a7edc, #1941a5); border: 2px solid #aaa; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;">â–¶</button>
+              style="width: 40px; height: 40px; border-radius: 50%; background: radial-gradient(circle, #5a7edc, #1941a5); border: 2px solid #aaa; color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px;">▶</button>
             <div class="wmp-timeline" style="flex: 1; display: flex; flex-direction: column; gap: 5px;">
               <input type="range" id="wmp-seek" value="0" min="0" max="100" style="width: 100%;">
               <div style="display: flex; justify-content: space-between; color: #ccc; font-size: 10px;">
                 <span id="wmp-current-time">00:00</span>
                 <span id="wmp-duration">00:00</span>
               </div>
+            </div>
+            <div class="wmp-volume" style="display: flex; align-items: center; gap: 5px; color: #ccc; font-size: 14px;">
+              <span>🔊</span>
+              <input type="range" id="wmp-volume" value="1" min="0" max="1" step="0.05" style="width: 60px;">
             </div>
           </div>
 
@@ -337,8 +351,7 @@
       <div class="xp-window" id="window-projects" style="display: none; width: 700px; height: 500px;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/Folder Closed.png"
-              class="title-icon">
+            <img src="assets/icons/Folder Closed.png" class="title-icon">
             Projects
           </div>
           <div class="title-bar-controls">
@@ -352,11 +365,11 @@
             <span>File</span><span>Edit</span><span>View</span><span>Favorites</span><span>Tools</span><span>Help</span>
           </div>
           <div class="nav-bar">
-            <button class="nav-btn"><span>ðŸ”™</span> Back</button>
-            <button class="nav-btn"><span>â­ï¸</span> Forward</button>
-            <button class="nav-btn"><span>ðŸ›‘</span> Stop</button>
-            <button class="nav-btn"><span>ðŸ”„</span> Refresh</button>
-            <button class="nav-btn"><span>ðŸ </span> Home</button>
+            <button class="nav-btn"><span>🔙</span> Back</button>
+            <button class="nav-btn"><span>⏭️</span> Forward</button>
+            <button class="nav-btn"><span>🛑</span> Stop</button>
+            <button class="nav-btn"><span>🔄</span> Refresh</button>
+            <button class="nav-btn"><span>🏠</span> Home</button>
           </div>
           <div class="address-bar">
             <span>Address</span>
@@ -405,8 +418,7 @@
       <div class="xp-window" id="window-capabilities" style="display: none;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/System Properties.png"
-              class="title-icon">
+            <img src="assets/icons/System Properties.png" class="title-icon">
             Capabilities
           </div>
           <div class="title-bar-controls">
@@ -463,8 +475,7 @@
       <div class="xp-window" id="window-notepad" style="display: none; width: 500px; z-index: 10;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/Notepad.png" class="title-icon"
-              alt="Notepad">
+            <img src="assets/icons/Notepad.png" class="title-icon" alt="Notepad">
             Untitled - Notepad
           </div>
           <div class="title-bar-controls">
@@ -487,8 +498,7 @@
       <div class="xp-window" id="window-paint" style="display: none; width: 600px; z-index: 10;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/Paint.png" class="title-icon"
-              alt="Paint">
+            <img src="assets/icons/Paint.png" class="title-icon" alt="Paint">
             untitled - Paint
           </div>
           <div class="title-bar-controls">
@@ -522,8 +532,7 @@
       <div class="xp-window" id="window-search" style="display: none; width: 450px; z-index: 10;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/Search.png" class="title-icon"
-              alt="Search">
+            <img src="assets/icons/Search.png" class="title-icon" alt="Search">
             Search Results
           </div>
           <div class="title-bar-controls">
@@ -538,8 +547,7 @@
               What do you want to search for?
             </div>
             <!-- Placeholder for Rover, user can swap with gif -->
-            <img src="assets/icons/Search.png" class="companion-avatar"
-              alt="Rover">
+            <img src="assets/icons/Search.png" class="companion-avatar" alt="Rover">
           </div>
           <div class="search-right">
             <h3>Search Companion</h3>
@@ -553,8 +561,7 @@
       <div class="xp-window" id="window-minesweeper" style="display: none; width: auto; z-index: 10;">
         <div class="title-bar">
           <div class="title-bar-text">
-            <img src="assets/icons/Minesweeper.png" class="title-icon"
-              alt="Minesweeper">
+            <img src="assets/icons/Minesweeper.png" class="title-icon" alt="Minesweeper">
             Minesweeper
           </div>
           <div class="title-bar-controls">
@@ -569,11 +576,56 @@
         <div class="window-body minesweeper-body">
           <div class="ms-header">
             <div class="ms-counter" id="ms-mines-count">010</div>
-            <button class="ms-face" id="ms-face">ðŸ™‚</button>
+            <button class="ms-face" id="ms-face">🙂</button>
             <div class="ms-counter" id="ms-timer">000</div>
           </div>
           <div class="ms-grid" id="ms-grid">
             <!-- JS generates 9x9 grid -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Window: Display Properties -->
+      <div class="xp-window" id="window-display-properties" style="display: none; width: 420px; z-index: 10;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            Display Properties
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body display-properties-body">
+          <div class="tabs">
+            <div class="tab">Themes</div>
+            <div class="tab active">Desktop</div>
+            <div class="tab">Screen Saver</div>
+            <div class="tab">Appearance</div>
+            <div class="tab">Settings</div>
+          </div>
+          <div class="tab-content">
+            <div class="preview-monitor-container">
+              <div class="preview-monitor">
+                <div class="preview-screen" id="preview-screen"
+                  style="background-image: url('assets/wallpapers/Bliss.jpg');"></div>
+              </div>
+            </div>
+
+            <div class="background-section">
+              <label>Background:</label>
+              <div class="background-list" id="wallpaper-list">
+                <div class="list-item" data-wallpaper="Automn.jpg">Automn</div>
+                <div class="list-item" data-wallpaper="Azul.jpg">Azul</div>
+                <div class="list-item active" data-wallpaper="Bliss.jpg">Bliss</div>
+                <div class="list-item" data-wallpaper="Red moon desert.jpg">Red moon desert</div>
+                <div class="list-item" data-wallpaper="Tulips.jpg">Tulips</div>
+              </div>
+            </div>
+          </div>
+          <div class="dialog-buttons dp-buttons">
+            <button class="xp-button" id="display-ok-btn">OK</button>
+            <button class="xp-button" id="display-cancel-btn">Cancel</button>
+            <button class="xp-button" id="display-apply-btn" disabled>Apply</button>
           </div>
         </div>
       </div>
@@ -585,8 +637,7 @@
   <!-- Start Menu -->
   <div id="start-menu" class="start-menu">
     <div class="start-menu-header">
-      <img src="assets/icons/User Accounts.png" class="user-avatar"
-        alt="User">
+      <img src="assets/icons/User Accounts.png" class="user-avatar" alt="User">
       <span>Rohan</span>
     </div>
     <div class="start-menu-body">
@@ -600,8 +651,7 @@
             </div>
           </a>
           <a href="#" class="start-item" data-window="window-capabilities">
-            <img class="item-icon"
-              src="assets/icons/System Properties.png">
+            <img class="item-icon" src="assets/icons/System Properties.png">
             <div class="item-text">
               <strong>Capabilities</strong>
               <span>What I do</span>
@@ -623,8 +673,7 @@
             </div>
           </a>
           <a href="#" class="start-item" data-window="window-mediaplayer">
-            <img class="item-icon"
-              src="assets/icons/Windows Media Player 10.png">
+            <img class="item-icon" src="assets/icons/Windows Media Player 10.png">
             <div class="item-text">
               <strong>Media Player</strong>
               <span>Video Edits</span>
@@ -649,7 +698,7 @@
         <a href="#" class="start-item all-programs">
           <div class="item-text" style="text-align: center; width: 100%;">
             <strong>All Programs</strong>
-            <span style="color: #333;">â–¶</span>
+            <span style="color: #333;">▶</span>
           </div>
         </a>
       </div>
@@ -672,8 +721,7 @@
         </a>
         <div class="separator"></div>
         <a href="#" class="start-item right-item">
-          <img src="assets/icons/System Properties.png"
-            class="small-icon"> Control Panel
+          <img src="assets/icons/System Properties.png" class="small-icon"> Control Panel
         </a>
         <a href="#" class="start-item right-item" data-window="window-contact">
           <img src="assets/icons/Run.png" class="small-icon"> Run...
@@ -708,8 +756,8 @@
       <!-- Open window tabs will appear here -->
     </div>
     <div class="system-tray">
-      <span class="tray-icon">ðŸ”Š</span>
-      <span class="tray-icon">ðŸ›¡ï¸</span>
+      <span class="tray-icon">🔊</span>
+      <span class="tray-icon">🛡️</span>
       <span id="clock" class="clock">12:00 PM</span>
     </div>
   </footer>
@@ -724,9 +772,9 @@
       <div class="menu-item disabled"><span>Paste</span></div>
       <div class="menu-item disabled"><span>Paste Shortcut</span></div>
       <div class="menu-separator"></div>
-      <div class="menu-item"><span>New</span><span>â–¶</span></div>
+      <div class="menu-item"><span>New</span><span>▶</span></div>
       <div class="menu-separator"></div>
-      <div class="menu-item"><span>Properties</span></div>
+      <div class="menu-item" id="desktop-properties-btn"><span>Properties</span></div>
     </div>
   </div>
 
@@ -737,7 +785,7 @@
       <div class="menu-item"><span>Explore</span></div>
       <div class="menu-item"><span>Search...</span></div>
       <div class="menu-separator"></div>
-      <div class="menu-item"><span>Send To</span><span>â–¶</span></div>
+      <div class="menu-item"><span>Send To</span><span>▶</span></div>
       <div class="menu-separator"></div>
       <div class="menu-item"><span>Cut</span></div>
       <div class="menu-item"><span>Copy</span></div>
@@ -753,7 +801,7 @@
   <div id="taskbar-menu" class="context-menu" style="display: none;">
     <div class="menu-gutter"></div>
     <div class="menu-items">
-      <div class="menu-item"><span>Toolbars</span><span>â–¶</span></div>
+      <div class="menu-item"><span>Toolbars</span><span>▶</span></div>
       <div class="menu-separator"></div>
       <div class="menu-item disabled"><span>Cascade Windows</span></div>
       <div class="menu-item disabled"><span>Tile Windows Horizontally</span></div>
@@ -769,7 +817,7 @@
 
   <!-- System Tray Balloon -->
   <div id="xp-balloon" class="xp-balloon" style="display: none;">
-    <div class="balloon-close">âœ•</div>
+    <div class="balloon-close">✕</div>
     <div class="balloon-content">
       <strong>Welcome to my portfolio!</strong>
       <span>Click around to explore.</span>
@@ -796,7 +844,7 @@
 
   <!-- Link Dialog Overlay -->
   <div class="xp-dialog-overlay" id="link-dialog-overlay" style="display: none;"></div>
-  
+
   <!-- Link Dialog -->
   <div class="xp-window xp-dialog" id="link-dialog" style="display: none; width: 350px;">
     <div class="title-bar">
@@ -819,7 +867,7 @@
 
   <!-- Turn Off Dialog Overlay -->
   <div id="turn-off-overlay" class="turn-off-overlay" style="display: none;"></div>
-  
+
   <!-- Turn Off Dialog -->
   <div id="turn-off-dialog" class="turn-off-dialog" style="display: none;">
     <div class="turn-off-header">
@@ -840,7 +888,7 @@
         <img src="assets/icons/Power.png" alt="Power">
         <span>Power</span>
       </div>
-      <div class="turn-off-option">
+      <div class="turn-off-option" id="btn-restart">
         <img src="assets/icons/Restart.png" alt="Restart">
         <span>Restart</span>
       </div>
