@@ -252,6 +252,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Desktop Icons
   desktopIcons.forEach(icon => {
+    icon.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (window.innerWidth <= 768) {
+        desktopIcons.forEach(i => i.classList.remove('selected'));
+        icon.classList.add('selected');
+        const windowId = icon.getAttribute('data-window');
+        openWindow(windowId, icon);
+      }
+    });
+
     icon.addEventListener('dblclick', () => {
       if (window.innerWidth > 768) {
         const windowId = icon.getAttribute('data-window');
@@ -373,19 +383,13 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Make desktop icons draggable
-  Draggable.create(".desktop-icon", {
+  const iconDraggables = Draggable.create(".desktop-icon", {
     bounds: ".desktop",
     edgeResistance: 0.65,
     onPress: function(e) {
       if (!this.target.classList.contains('selected')) {
         desktopIcons.forEach(i => i.classList.remove('selected'));
         this.target.classList.add('selected');
-      }
-    },
-    onClick: function(e) {
-      if (window.innerWidth <= 768) {
-        const windowId = this.target.getAttribute('data-window');
-        openWindow(windowId, this.target);
       }
     },
     onDrag: function() {
@@ -398,6 +402,16 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     }
   });
+
+  function updateDraggables() {
+    if (window.innerWidth <= 768) {
+      iconDraggables.forEach(d => d.disable());
+    } else {
+      iconDraggables.forEach(d => d.enable());
+    }
+  }
+  window.addEventListener('resize', updateDraggables);
+  updateDraggables();
 
   // --- Marquee Selection ---
   let isSelecting = false;
@@ -423,31 +437,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  let rafPending = false;
   window.addEventListener('mousemove', (e) => {
-    if (!isSelecting) return;
+    if (!isSelecting || rafPending) return;
     
     const currentX = e.clientX;
     const currentY = e.clientY;
     
-    // Mark as dragging if moved beyond a tiny threshold
-    if (Math.abs(currentX - startX) > 2 || Math.abs(currentY - startY) > 2) {
-      wasDragging = true;
-    }
-    
-    const width = Math.abs(currentX - startX);
-    const height = Math.abs(currentY - startY);
-    const left = Math.min(currentX, startX);
-    const top = Math.min(currentY, startY);
-    
-    selectionBox.style.width = width + 'px';
-    selectionBox.style.height = height + 'px';
-    selectionBox.style.left = left + 'px';
-    selectionBox.style.top = top + 'px';
-    
-    // Check intersection with icons
-    const boxRect = selectionBox.getBoundingClientRect();
-    desktopIcons.forEach(icon => {
-      const iconRect = icon.getBoundingClientRect();
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      // Mark as dragging if moved beyond a tiny threshold
+      if (Math.abs(currentX - startX) > 2 || Math.abs(currentY - startY) > 2) {
+        wasDragging = true;
+      }
+      
+      const width = Math.abs(currentX - startX);
+      const height = Math.abs(currentY - startY);
+      const left = Math.min(currentX, startX);
+      const top = Math.min(currentY, startY);
+      
+      selectionBox.style.width = width + 'px';
+      selectionBox.style.height = height + 'px';
+      selectionBox.style.left = left + 'px';
+      selectionBox.style.top = top + 'px';
+      
+      // Check intersection with icons
+      const boxRect = selectionBox.getBoundingClientRect();
+      desktopIcons.forEach(icon => {
+        const iconRect = icon.getBoundingClientRect();
       const isIntersecting = !(
         boxRect.right < iconRect.left || 
         boxRect.left > iconRect.right || 
@@ -695,6 +713,17 @@ document.addEventListener('DOMContentLoaded', () => {
           
           cell.addEventListener('mousedown', handleMsClick);
           cell.addEventListener('contextmenu', (e) => { e.preventDefault(); handleMsRightClick(r, c, cell); });
+          
+          let pressTimer;
+          cell.addEventListener('touchstart', (e) => {
+            pressTimer = window.setTimeout(() => {
+              handleMsRightClick(r, c, cell);
+              e.preventDefault();
+            }, 500);
+          }, {passive: false});
+          cell.addEventListener('touchend', () => clearTimeout(pressTimer));
+          cell.addEventListener('touchmove', () => clearTimeout(pressTimer));
+          
           msGrid.appendChild(cell);
         }
       }
