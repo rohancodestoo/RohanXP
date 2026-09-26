@@ -466,17 +466,18 @@ document.addEventListener('DOMContentLoaded', () => {
       const boxRect = selectionBox.getBoundingClientRect();
       desktopIcons.forEach(icon => {
         const iconRect = icon.getBoundingClientRect();
-      const isIntersecting = !(
-        boxRect.right < iconRect.left || 
-        boxRect.left > iconRect.right || 
-        boxRect.bottom < iconRect.top || 
-        boxRect.top > iconRect.bottom
-      );
-      if (isIntersecting) {
-        icon.classList.add('selected');
-      } else {
-        icon.classList.remove('selected');
-      }
+        const isIntersecting = !(
+          boxRect.right < iconRect.left || 
+          boxRect.left > iconRect.right || 
+          boxRect.bottom < iconRect.top || 
+          boxRect.top > iconRect.bottom
+        );
+        if (isIntersecting) {
+          icon.classList.add('selected');
+        } else {
+          icon.classList.remove('selected');
+        }
+      });
     });
   });
 
