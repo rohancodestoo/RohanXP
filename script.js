@@ -252,17 +252,29 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Desktop Icons
   desktopIcons.forEach(icon => {
+    let lastTap = 0;
     icon.addEventListener('click', (e) => {
       e.stopPropagation();
       if (!wasDragging) {
         desktopIcons.forEach(i => i.classList.remove('selected'));
         icon.classList.add('selected');
+        
+        // Single tap to open on mobile, or double tap fallback
+        const currentTime = new Date().getTime();
+        const tapLength = currentTime - lastTap;
+        if (window.innerWidth <= 768 || (tapLength < 500 && tapLength > 0)) {
+          const windowId = icon.getAttribute('data-window');
+          openWindow(windowId, icon);
+        }
+        lastTap = currentTime;
       }
     });
     
     icon.addEventListener('dblclick', () => {
-      const windowId = icon.getAttribute('data-window');
-      openWindow(windowId, icon);
+      if (window.innerWidth > 768) {
+        const windowId = icon.getAttribute('data-window');
+        openWindow(windowId, icon);
+      }
     });
   });
   

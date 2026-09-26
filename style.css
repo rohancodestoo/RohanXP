@@ -1445,6 +1445,15 @@ body, html {
   .title-bar {
     border-radius: 0;
     cursor: default;
+    padding: 8px 5px;
+  }
+  .title-bar-controls button {
+    width: 32px;
+    height: 32px;
+  }
+  .title-bar-controls button.close-btn::after {
+    font-size: 24px;
+    line-height: 24px;
   }
   .xp-dialog, #link-dialog {
     width: 90% !important;
@@ -1478,6 +1487,11 @@ body, html {
     width: 100%;
     bottom: 30px;
     left: 0;
+    max-height: calc(100vh - 30px);
+    overflow-y: auto;
+  }
+  .start-item {
+    padding: 12px 6px;
   }
   .start-menu-body {
     flex-direction: column;
@@ -1528,17 +1542,47 @@ body, html {
     padding: 0;
   }
 
-  /* Explorer Windows */
-  .explorer-layout {
+  /* Windows Media Player */
+  .wmp-content {
+    flex-direction: column !important;
+  }
+  .wmp-playlist {
+    width: 100% !important;
+    flex: none !important;
+    height: 150px !important;
+    border-left: none !important;
+    border-top: 1px solid #333 !important;
+  }
+
+  /* Search Window */
+  .search-body {
     flex-direction: column;
   }
-  .explorer-sidebar {
+  .search-left {
     width: 100%;
+    flex-direction: row;
+    height: auto;
+    padding: 10px;
     border-right: none;
     border-bottom: 1px solid #aca899;
   }
+
+  /* Explorer Windows */
+  .explorer-layout, .explorer-body {
+    flex-direction: column;
+  }
+  .explorer-sidebar, .explorer-left {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #aca899;
+    flex: none;
+    max-height: 150px;
+  }
   .explorer-right {
     padding: 10px;
+  }
+  .nav-bar, .menu-bar, .address-bar {
+    flex-wrap: wrap;
   }
 
   /* About Me Window */
