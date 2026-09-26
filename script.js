@@ -252,24 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Desktop Icons
   desktopIcons.forEach(icon => {
-    let lastTap = 0;
-    icon.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (!wasDragging) {
-        desktopIcons.forEach(i => i.classList.remove('selected'));
-        icon.classList.add('selected');
-        
-        // Single tap to open on mobile, or double tap fallback
-        const currentTime = new Date().getTime();
-        const tapLength = currentTime - lastTap;
-        if (window.innerWidth <= 768 || (tapLength < 500 && tapLength > 0)) {
-          const windowId = icon.getAttribute('data-window');
-          openWindow(windowId, icon);
-        }
-        lastTap = currentTime;
-      }
-    });
-    
     icon.addEventListener('dblclick', () => {
       if (window.innerWidth > 768) {
         const windowId = icon.getAttribute('data-window');
@@ -296,26 +278,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const maximizeBtn = win.querySelector('button[aria-label="Maximize"]');
     const titleBar = win.querySelector('.title-bar');
 
-    if (closeBtn) {
-      closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeWindow(win);
-      });
-    }
+    ['click', 'touchend'].forEach(evt => {
+      if (closeBtn) {
+        closeBtn.addEventListener(evt, (e) => {
+          e.stopPropagation();
+          if (evt === 'touchend') e.preventDefault();
+          closeWindow(win);
+        });
+      }
 
-    if (minimizeBtn) {
-      minimizeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        minimizeWindow(win);
-      });
-    }
+      if (minimizeBtn) {
+        minimizeBtn.addEventListener(evt, (e) => {
+          e.stopPropagation();
+          if (evt === 'touchend') e.preventDefault();
+          minimizeWindow(win);
+        });
+      }
 
-    if (maximizeBtn) {
-      maximizeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMaximize(win);
-      });
-    }
+      if (maximizeBtn) {
+        maximizeBtn.addEventListener(evt, (e) => {
+          e.stopPropagation();
+          if (evt === 'touchend') e.preventDefault();
+          toggleMaximize(win);
+        });
+      }
+    });
 
     if (titleBar) {
       titleBar.addEventListener('dblclick', (e) => {
@@ -393,6 +380,12 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!this.target.classList.contains('selected')) {
         desktopIcons.forEach(i => i.classList.remove('selected'));
         this.target.classList.add('selected');
+      }
+    },
+    onClick: function(e) {
+      if (window.innerWidth <= 768) {
+        const windowId = this.target.getAttribute('data-window');
+        openWindow(windowId, this.target);
       }
     },
     onDrag: function() {
