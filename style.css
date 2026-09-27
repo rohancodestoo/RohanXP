@@ -1432,46 +1432,6 @@ body, html {
 
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
-  /* Windows */
-  .xp-window {
-    width: 100% !important;
-    height: calc(100vh - 30px) !important;
-    top: 0 !important;
-    left: 0 !important;
-    transform: none !important;
-    border-radius: 0 !important;
-    border: none !important;
-    margin: 0 !important;
-  }
-  .title-bar {
-    border-radius: 0;
-    cursor: default;
-    padding: 8px 5px;
-  }
-  .title-bar-controls button {
-    width: 32px;
-    height: 32px;
-  }
-  .title-bar-controls button.close-btn::after {
-    font-size: 24px;
-    line-height: 24px;
-  }
-  .xp-dialog, #link-dialog {
-    width: 90% !important;
-    height: auto !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    border: 3px solid #0058e6 !important;
-    border-top: none !important;
-  }
-  .turn-off-dialog {
-    width: 90% !important;
-  }
-  .turn-off-body {
-    flex-wrap: wrap;
-    gap: 15px;
-  }
 
   /* Taskbar */
   .taskbar-apps {
@@ -1543,76 +1503,10 @@ body, html {
     padding: 0;
   }
 
-  /* Windows Media Player */
-  .wmp-content {
-    flex-direction: column !important;
-  }
-  .wmp-playlist {
-    width: 100% !important;
-    flex: none !important;
-    height: 150px !important;
-    border-left: none !important;
-    border-top: 1px solid #333 !important;
-  }
 
-  /* Search Window */
-  .search-body {
-    flex-direction: column;
-  }
-  .search-left {
-    width: 100%;
-    flex-direction: row;
-    height: auto;
-    padding: 10px;
-    border-right: none;
-    border-bottom: 1px solid #aca899;
-  }
 
-  /* Explorer Windows */
-  .explorer-layout, .explorer-body {
-    flex-direction: column;
-  }
-  .explorer-sidebar, .explorer-left {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid #aca899;
-    flex: none;
-    max-height: 150px;
-  }
-  .explorer-right {
-    padding: 10px;
-  }
-  .nav-bar, .menu-bar, .address-bar {
-    flex-wrap: wrap;
-  }
 
-  /* About Me Window */
-  .about-right {
-    padding: 15px;
-  }
-  .about-row {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .about-title {
-    font-size: 24px;
-    text-align: center;
-  }
-  .about-avatar {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 15px;
-  }
 
-  /* Dark Grid / Projects */
-  .dark-card {
-    width: 100%;
-  }
-  .dark-header {
-    flex-direction: column;
-    gap: 10px;
-  }
 
   /* Boot Screen */
   .boot-logo img {
@@ -1843,4 +1737,21 @@ body, html {
   justify-content: flex-end;
   margin-top: 15px;
   gap: 8px;
+}
+
+/* Scanlines Filter */
+body.scanlines-active::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.25) 50%
+  );
+  background-size: 100% 4px;
+  z-index: 100000;
+  pointer-events: none;
 }

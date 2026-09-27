@@ -549,6 +549,33 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.addEventListener('mouseout', () => {
       isDrawing = false;
     });
+
+    // Touch event handlers for mobile devices
+    canvas.addEventListener('touchstart', (e) => {
+      isDrawing = true;
+      const rect = canvas.getBoundingClientRect();
+      const touch = e.touches[0];
+      ctx.beginPath();
+      ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+      e.preventDefault();
+    }, { passive: false });
+    
+    canvas.addEventListener('touchmove', (e) => {
+      if (isDrawing) {
+        const rect = canvas.getBoundingClientRect();
+        const touch = e.touches[0];
+        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        ctx.stroke();
+        e.preventDefault();
+      }
+    }, { passive: false });
+    
+    canvas.addEventListener('touchend', () => {
+      isDrawing = false;
+    });
+    canvas.addEventListener('touchcancel', () => {
+      isDrawing = false;
+    });
   }
 
   // --- Context Menus ---
@@ -581,6 +608,14 @@ document.addEventListener('DOMContentLoaded', () => {
         gsap.set(icon, { x: 0, y: 0, clearProps: "x,y,transform" });
         icon.style.transform = '';
       });
+      hideAllMenus();
+    });
+  }
+
+  const toggleScanlinesBtn = document.getElementById('toggle-scanlines-btn');
+  if (toggleScanlinesBtn) {
+    toggleScanlinesBtn.addEventListener('click', () => {
+      document.body.classList.toggle('scanlines-active');
       hideAllMenus();
     });
   }
