@@ -222,6 +222,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Expose globally for inline and external triggers
+  window.openWindow = openWindow;
+  window.closeWindow = closeWindow;
+
   // Minimize Window
   function minimizeWindow(win) {
     gsap.to(win, { 
@@ -278,6 +282,15 @@ document.addEventListener('DOMContentLoaded', () => {
       if (windowId) openWindow(windowId, startBtn);
     });
   });
+
+  // Resume window Contact Me button
+  const resumeContactBtn = document.getElementById('resume-nav-contact');
+  if (resumeContactBtn) {
+    resumeContactBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWindow('window-contact', resumeContactBtn);
+    });
+  }
 
   // Window Controls & Focus
   windows.forEach(win => {
@@ -721,6 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const msGrid = document.getElementById('ms-grid');
   const msFace = document.getElementById('ms-face');
   const msMinesCount = document.getElementById('ms-mines-count');
+  const msTimer = document.getElementById('ms-timer');
   
   if (msGrid) {
     let board = [];
@@ -730,8 +744,16 @@ document.addEventListener('DOMContentLoaded', () => {
     let minesLeft = totalMines;
     let gameOver = false;
     let firstClick = true;
+    let timerSeconds = 0;
+    let timerInterval = null;
     
     function initMinesweeper() {
+      if (timerInterval) {
+        clearInterval(timerInterval);
+        timerInterval = null;
+      }
+      timerSeconds = 0;
+      if (msTimer) msTimer.textContent = '000';
       board = Array.from({length: rows}, () => Array(cols).fill({ mine: false, revealed: false, flagged: false, count: 0 }));
       msGrid.innerHTML = '';
       gameOver = false;
@@ -804,10 +826,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if(firstClick) {
         placeMines(r, c);
         firstClick = false;
+        if (!timerInterval) {
+          timerInterval = setInterval(() => {
+            timerSeconds++;
+            if (timerSeconds > 999) timerSeconds = 999;
+            if (msTimer) msTimer.textContent = timerSeconds.toString().padStart(3, '0');
+          }, 1000);
+        }
       }
       
       if(board[r][c].mine) {
         gameOver = true;
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
         msFace.textContent = '😵';
         revealAll();
       } else {
@@ -863,6 +893,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
       if(unrevealedSafe === 0) {
         gameOver = true;
+        if (timerInterval) { clearInterval(timerInterval); timerInterval = null; }
         msFace.textContent = '😎';
       }
     }
@@ -1235,11 +1266,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const bgToUse = currentBg ? currentBg : "url(\"assets/wallpapers/Bliss.jpg\")";
         previewScreen.style.backgroundImage = bgToUse;
         
-        // Extract filename robustly handling different quote styles in url()
+        // Extract filename robustly handling different quote styles and url encoding
         const match = bgToUse.match(/url\(['"]?(.*?)['"]?\)/);
         let bgFilename = 'Bliss.jpg';
         if (match && match[1]) {
-           bgFilename = match[1].split('/').pop();
+           bgFilename = decodeURIComponent(match[1].split('/').pop().replace(/["']/g, ''));
         }
 
         const listItems = wallpaperList.querySelectorAll('.list-item');
@@ -1285,6 +1316,56 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         location.reload();
       }, 3000);
+    });
+  }
+
+  // --- Run Dialog Logic ---
+  const runInput = document.getElementById('run-command-input');
+  const runBtnOk = document.getElementById('run-btn-ok');
+  const runBtnCancel = document.getElementById('run-btn-cancel');
+  const runWin = document.getElementById('window-run');
+
+  function executeRunCommand() {
+    if (!runInput) return;
+    const cmd = runInput.value.trim().toLowerCase();
+    if (!cmd) return;
+    
+    const commandMap = {
+      'notepad': 'window-notepad',
+      'paint': 'window-paint',
+      'mspaint': 'window-paint',
+      'minesweeper': 'window-minesweeper',
+      'mine': 'window-minesweeper',
+      'resume': 'window-resume',
+      'about': 'window-about',
+      'explorer': 'window-about',
+      'projects': 'window-projects',
+      'capabilities': 'window-capabilities',
+      'contact': 'window-contact',
+      'media': 'window-mediaplayer',
+      'wmp': 'window-mediaplayer',
+      'wmplayer': 'window-mediaplayer',
+      'search': 'window-search',
+      'display': 'window-display-properties'
+    };
+
+    if (commandMap[cmd]) {
+      closeWindow(runWin);
+      openWindow(commandMap[cmd], null);
+      runInput.value = '';
+    } else {
+      alert(`Windows cannot find '${cmd}'. Make sure you typed the name correctly, and then try again.`);
+    }
+  }
+
+  if (runBtnOk) runBtnOk.addEventListener('click', executeRunCommand);
+  if (runBtnCancel && runWin) runBtnCancel.addEventListener('click', () => closeWindow(runWin));
+  if (runInput) {
+    runInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        executeRunCommand();
+      }
     });
   }
 

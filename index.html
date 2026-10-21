@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -173,7 +173,7 @@
             <button class="nav-btn"><img src="assets/icons/Save.png"> Save</button>
             <button class="nav-btn"><img src="assets/icons/Printer.png"> Print</button>
             <div class="nav-divider"></div>
-            <button class="nav-btn" onclick="document.getElementById('icon-contact').click()"><img
+            <button class="nav-btn" id="resume-nav-contact" onclick="window.openWindow ? window.openWindow('window-contact', this) : null"><img
                 src="assets/icons/Search for people.png"> Contact Me</button>
           </div>
         </div>
@@ -634,6 +634,33 @@
         </div>
       </div>
 
+      <!-- Window: Run Dialog -->
+      <div class="xp-window xp-dialog" id="window-run" style="display: none; width: 380px;">
+        <div class="title-bar">
+          <div class="title-bar-text">
+            <img src="assets/icons/Run.png" class="title-icon" alt="Run">
+            Run
+          </div>
+          <div class="title-bar-controls">
+            <button aria-label="Close" class="close-btn"></button>
+          </div>
+        </div>
+        <div class="window-body dialog-body" style="padding: 15px; font-size: 11px;">
+          <div style="display: flex; gap: 15px; align-items: flex-start; margin-bottom: 15px;">
+            <img src="assets/icons/Run.png" style="width: 32px; height: 32px; flex-shrink: 0;" alt="Run">
+            <p style="margin: 0; line-height: 1.4; color: black;">Type the name of a program, folder, document, or Internet resource, and Windows will open it for you.</p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 20px;">
+            <label for="run-command-input" style="font-weight: bold; color: black;">Open:</label>
+            <input type="text" id="run-command-input" style="flex: 1; padding: 4px 6px; border: 1px solid #7f9db9; font-family: Tahoma, sans-serif; font-size: 11px; outline: none;" placeholder="notepad, paint, minesweeper, resume, projects...">
+          </div>
+          <div class="dialog-buttons">
+            <button class="xp-button" id="run-btn-ok" style="min-width: 65px;">OK</button>
+            <button class="xp-button" id="run-btn-cancel" style="min-width: 65px;">Cancel</button>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </main>
@@ -727,7 +754,7 @@
         <a href="#" class="start-item right-item">
           <img src="assets/icons/System Properties.png" class="small-icon"> Control Panel
         </a>
-        <a href="#" class="start-item right-item" data-window="window-contact">
+        <a href="#" class="start-item right-item" data-window="window-run">
           <img src="assets/icons/Run.png" class="small-icon"> Run...
         </a>
       </div>
