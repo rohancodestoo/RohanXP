@@ -1300,8 +1300,17 @@ document.addEventListener('DOMContentLoaded', () => {
       shutdownScreen.style.display = 'flex';
       shutdownSound.play().catch(e => console.log('Audio play failed:', e));
       setTimeout(() => {
-        document.body.innerHTML = '';
-        document.body.style.backgroundColor = 'black';
+        // Hide the "shutting down" message and Windows logo, show farewell
+        const shutdownMsg = document.getElementById('shutdown-message');
+        const shutdownFarewell = document.getElementById('shutdown-farewell');
+        const shutdownLogo = shutdownScreen.querySelector('img[alt="Windows XP"]');
+        if (shutdownMsg) shutdownMsg.style.display = 'none';
+        if (shutdownLogo) shutdownLogo.style.display = 'none';
+        if (shutdownFarewell) {
+          shutdownFarewell.style.display = 'block';
+          shutdownFarewell.style.opacity = '0';
+          gsap.to(shutdownFarewell, { opacity: 1, duration: 1, ease: 'power2.out' });
+        }
       }, 3000);
     });
   }
