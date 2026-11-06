@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Play click sound on interactive elements
   document.addEventListener('mousedown', (e) => {
-    if (e.target.closest('button, .desktop-icon, .start-item, .taskbar-tab, .xp-panel-content a, #shutdown-farewell a')) {
+    if (e.target.closest('button, .desktop-icon, .start-item, .taskbar-tab, .xp-panel-content a, .farewell-btn')) {
       playClick();
     }
   });
@@ -1120,7 +1120,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Intercept external links (except shutdown screen farewell links)
   document.querySelectorAll('a[target="_blank"]').forEach(link => {
-    if (link.closest('#shutdown-screen')) return;
+    if (link.closest('#shutdown-screen') || link.classList.contains('farewell-btn')) return;
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.href;
@@ -1128,6 +1128,19 @@ document.addEventListener('DOMContentLoaded', () => {
       const img = link.querySelector('img');
       const iconSrc = img ? img.src : null;
       showLinkDialog(href, text, iconSrc);
+    });
+  });
+
+  // Ensure farewell buttons open smoothly on mobile touch as well as desktop click
+  document.querySelectorAll('.farewell-btn').forEach(btn => {
+    btn.addEventListener('touchend', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      playClick();
+      const url = btn.getAttribute('href');
+      if (url) {
+        window.open(url, '_blank', 'noopener,noreferrer');
+      }
     });
   });
 

@@ -918,6 +918,72 @@ body, html {
   border-radius: 5px;
 }
 
+/* Shutdown Screen Farewell */
+#shutdown-farewell {
+  display: none;
+  text-align: center;
+  margin-top: 25px;
+  position: relative;
+  z-index: 10;
+  pointer-events: auto;
+}
+
+.shutdown-farewell-text {
+  color: white;
+  font-size: 17px;
+  font-family: Tahoma, 'Segoe UI', Arial, sans-serif;
+  margin: 0 0 20px 0;
+  padding: 0 15px;
+  line-height: 1.4;
+  letter-spacing: 0.5px;
+}
+
+.farewell-social-links {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 20;
+}
+
+.farewell-btn {
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0.3);
+  touch-action: manipulation;
+  user-select: auto;
+  -webkit-user-select: auto;
+  position: relative;
+  z-index: 30;
+}
+
+.farewell-btn:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.farewell-btn:active {
+  background: rgba(255, 255, 255, 0.35);
+  transform: scale(0.95);
+}
+
+.farewell-btn img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  pointer-events: none;
+}
+
 /* Selection Box */
 .selection-box {
   position: absolute;
@@ -1501,6 +1567,21 @@ body, html {
   .login-bottom {
     justify-content: center;
     padding: 0;
+  }
+
+  .shutdown-farewell-text {
+    font-size: 15px;
+    margin-bottom: 16px;
+  }
+
+  #shutdown-screen .login-top {
+    height: 30px;
+    pointer-events: none;
+  }
+
+  #shutdown-screen .login-bottom {
+    height: 30px;
+    pointer-events: none;
   }
 
 
