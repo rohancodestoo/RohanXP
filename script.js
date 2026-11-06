@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Play click sound on interactive elements
   document.addEventListener('mousedown', (e) => {
-    if (e.target.closest('button, .desktop-icon, .start-item, .taskbar-tab, .xp-panel-content a')) {
+    if (e.target.closest('button, .desktop-icon, .start-item, .taskbar-tab, .xp-panel-content a, #shutdown-farewell a')) {
       playClick();
     }
   });
@@ -1098,8 +1098,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function showLinkDialog(href, name, iconSrc) {
     currentLinkHref = href;
     linkIcon.src = iconSrc || 'assets/icons/Internet Shortcut.png';
-    linkText.textContent = `Are you sure you want to open '${name}'?`;
-    btnConfirm.textContent = `Visit ${name}`;
+    linkText.textContent = `Are you sure you want to open ${name ? `'${name}'` : 'this link'}?`;
+    btnConfirm.textContent = name ? `Visit ${name}` : 'Visit Link';
     
     linkOverlay.style.display = 'block';
     linkDialog.style.display = 'flex';
@@ -1118,8 +1118,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }});
   }
 
-  // Intercept external links
+  // Intercept external links (except shutdown screen farewell links)
   document.querySelectorAll('a[target="_blank"]').forEach(link => {
+    if (link.closest('#shutdown-screen')) return;
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.href;
