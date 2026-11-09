@@ -1,39 +1,50 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Rohan's Portfolio - Windows XP</title>
+  <meta name="description" content="A nostalgic Windows XP-themed interactive resume and portfolio.">
   <link rel="icon" type="image/png" href="assets/icons/windows-xp.png">
+
+  <!-- Open Graph / Social Meta Tags -->
+  <meta property="og:title" content="Rohan's Portfolio - Windows XP">
+  <meta property="og:description" content="A nostalgic Windows XP-themed interactive resume and portfolio.">
+  <meta property="og:image" content="assets/icons/boot screen.jpg">
+  <meta property="og:url" content="https://rohancodestoo.github.io/RohanXP/">
+  <meta property="og:type" content="website">
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tahoma:wght@400;700&display=swap" rel="stylesheet">
 
+  <!-- Preload Boot Screen -->
+  <link rel="preload" as="image" href="assets/icons/boot screen.jpg">
+
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=4">
 
   <!-- GSAP & Draggable -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/Draggable.min.js"></script>
 
-  <script defer src="script.js?v=2"></script>
+  <script defer src="script.js?v=4"></script>
 </head>
 
 <body>
 
   <!-- Boot Screen -->
   <div id="boot-screen" class="boot-screen">
-    <div class="boot-logo">
-      <img src="assets/icons/windows xp logo.png" alt="Windows XP Logo">
-    </div>
-    <div class="loading-bar">
-      <div class="loading-blocks">
-        <div class="block"></div>
-        <div class="block"></div>
-        <div class="block"></div>
+    <div class="boot-container">
+      <img src="assets/icons/boot screen.jpg" alt="Windows XP" class="boot-image" fetchpriority="high">
+      <div class="loading-bar">
+        <div class="loading-blocks">
+          <div class="block"></div>
+          <div class="block"></div>
+          <div class="block"></div>
+        </div>
       </div>
     </div>
     <div class="boot-footer">
@@ -81,7 +92,7 @@
   <div id="shutdown-screen" class="login-screen" style="display: none; z-index: 10005;">
     <div class="login-top"></div>
     <div class="login-middle" style="justify-content: center; flex-direction: column; align-items: center;">
-      <img src="assets/icons/windows xp logo.png" alt="Windows XP" style="width: 250px; margin-bottom: 20px;">
+      <img src="assets/icons/RohanXp.png" alt="Windows XP" style="width: 250px; margin-bottom: 20px;">
       <div id="shutdown-message"
         style="color: white; font-size: 20px; font-family: Tahoma, 'Segoe UI', Arial, sans-serif;">
         Windows is shutting down...
@@ -92,13 +103,16 @@
           thank you for taking this tour! cya ; )
         </p>
         <div class="farewell-social-links">
-          <a href="https://instagram.com/rohan.jpg_/" class="farewell-btn" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <a href="https://instagram.com/rohan.jpg_/" class="farewell-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="Instagram">
             <img src="assets/icons/instagram.png" alt="Instagram">
           </a>
-          <a href="https://www.linkedin.com/in/rohan-ekshinge" class="farewell-btn" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <a href="https://www.linkedin.com/in/rohan-ekshinge" class="farewell-btn" target="_blank"
+            rel="noopener noreferrer" aria-label="LinkedIn">
             <img src="assets/icons/linkedin.png" alt="LinkedIn">
           </a>
-          <a href="https://github.com/rohancodestoo/" class="farewell-btn" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+          <a href="https://github.com/rohancodestoo/" class="farewell-btn" target="_blank" rel="noopener noreferrer"
+            aria-label="GitHub">
             <img src="assets/icons/github.svg" alt="GitHub" style="filter: invert(1);">
           </a>
         </div>
@@ -186,9 +200,13 @@
             <span>File</span><span>View</span><span>Help</span>
           </div>
           <div class="nav-bar">
-            <button class="nav-btn"><img src="assets/icons/Magnifier.png"> Zoom</button>
-            <button class="nav-btn"><img src="assets/icons/Save.png"> Save</button>
-            <button class="nav-btn"><img src="assets/icons/Printer.png"> Print</button>
+            <button class="nav-btn" id="resume-nav-open" type="button"><img src="assets/icons/Magnifier.png">
+              Open</button>
+            <a href="assets/resume.pdf" download="Rohan_Resume.pdf" class="nav-btn"
+              style="text-decoration: none; color: inherit; display: inline-flex; align-items: center;"><img
+                src="assets/icons/Save.png"> Save</a>
+            <button class="nav-btn" id="resume-nav-print" type="button"><img src="assets/icons/Printer.png">
+              Print</button>
             <div class="nav-divider"></div>
             <button class="nav-btn" id="resume-nav-contact"
               onclick="window.openWindow ? window.openWindow('window-contact', this) : null"><img
@@ -196,9 +214,15 @@
           </div>
         </div>
         <div class="window-body"
-          style="padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden; border: none; border-left: 1px solid #7f9db9; border-right: 1px solid #7f9db9; background: white;">
-          <iframe src="assets/resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
+          style="padding: 0; margin: 0; display: flex; flex-direction: column; flex: 1; overflow: hidden; border: none; border-left: 1px solid #7f9db9; border-right: 1px solid #7f9db9; background: white; position: relative;">
+          <iframe id="resume-iframe" data-src="assets/resume.pdf#toolbar=0&navpanes=0&scrollbar=0"
             style="flex: 1; width: 100%; height: 100%; border: none;"></iframe>
+          <div class="mobile-pdf-notice"
+            style="display: none; padding: 10px 15px; text-align: center; background: #ffffe1; border-top: 1px solid #d4d0c8; font-size: 11px; color: #333;">
+            <span>PDF preview not rendering in this browser? </span>
+            <a href="assets/resume.pdf" target="_blank" rel="noopener noreferrer"
+              style="color: #003399; font-weight: bold; margin-left: 4px;">Tap here to open resume</a>
+          </div>
         </div>
       </div>
 

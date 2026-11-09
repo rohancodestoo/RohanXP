@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/icons/windows xp logo.png" alt="Windows XP Logo" width="150" />
+  <img src="assets/icons/RohanXp.png" alt="RohanXP Logo" width="150" />
   <h1>RohanXP</h1>
   <p>A nostalgic Windows XP-themed interactive resume and portfolio.</p>
 </div>

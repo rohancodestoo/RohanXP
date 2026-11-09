@@ -746,16 +746,29 @@ body, html {
   align-items: center;
   justify-content: center;
 }
-.boot-logo {
-  margin-bottom: 80px;
+.boot-container {
+  position: relative;
+  width: min(100vw, 1000px);
+  max-height: 80vh;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
-.boot-logo img {
-  width: 400px;
-  max-width: 80vw;
+.boot-image {
+  width: 100%;
+  height: auto;
+  max-height: 80vh;
   object-fit: contain;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+.boot-container .loading-bar {
+  position: absolute;
+  top: 64%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
 }
 
 .loading-bar {
@@ -1590,8 +1603,19 @@ body, html {
 
 
   /* Boot Screen */
-  .boot-logo img {
-    max-width: 90vw;
+  .boot-container {
+    width: 135vw;
+    max-width: 600px;
+  }
+  .boot-footer {
+    padding: 0 20px;
+    bottom: 20px;
+  }
+  .boot-footer .copyright {
+    font-size: 11px;
+  }
+  .boot-footer .microsoft {
+    font-size: 18px;
   }
 }
 

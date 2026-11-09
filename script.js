@@ -175,6 +175,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const win = document.getElementById(windowId);
     if (!win) return;
     
+    // Lazy-load PDF iframe only when resume window is opened (prevents mobile/Instagram auto-redirection on initial boot)
+    if (windowId === 'window-resume') {
+      const resumeIframe = document.getElementById('resume-iframe');
+      if (resumeIframe && !resumeIframe.src && resumeIframe.dataset.src) {
+        resumeIframe.src = resumeIframe.dataset.src;
+      }
+    }
+    
     if (win.style.display === 'none') {
       win.style.display = 'flex';
       bringToFront(win);
@@ -283,13 +291,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Resume window Contact Me button
+  // Resume window toolbar buttons
   const resumeContactBtn = document.getElementById('resume-nav-contact');
   if (resumeContactBtn) {
     resumeContactBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       openWindow('window-contact', resumeContactBtn);
     });
+  }
+  const resumeNavOpen = document.getElementById('resume-nav-open');
+  if (resumeNavOpen) {
+    resumeNavOpen.addEventListener('click', () => {
+      window.open('assets/resume.pdf', '_blank');
+    });
+  }
+  const resumeNavPrint = document.getElementById('resume-nav-print');
+  if (resumeNavPrint) {
+    resumeNavPrint.addEventListener('click', () => {
+      window.open('assets/resume.pdf', '_blank');
+    });
+  }
+
+  // Show fallback notice on mobile/in-app browsers if PDF preview cannot render
+  if (/Android|iPhone|iPad|iPod|Instagram/i.test(navigator.userAgent)) {
+    const mobilePdfNotice = document.querySelector('.mobile-pdf-notice');
+    if (mobilePdfNotice) mobilePdfNotice.style.display = 'block';
   }
 
   // Window Controls & Focus
