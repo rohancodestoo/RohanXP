@@ -61,7 +61,7 @@ To run this project locally on your machine:
 Feel free to reach out or check out my other work!
 
 - **GitHub:** [rohancodestoo](https://github.com/rohancodestoo)
-- **LinkedIn:** [Your LinkedIn Profile] *(Add link here)*
+- **LinkedIn:** [Rohan Ekshinge] (https://www.linkedin.com/in/rohan-ekshinge/)
 - **Instagram:** [@rohan.jpg_](https://www.instagram.com/rohan.jpg_/)
 
 ---
